@@ -1,0 +1,232 @@
+rails new rails3app -d mysql
+
+gem "authlogic"
+gem "rails3-generators"
+
+bundle install
+
+rails g authlogic:session UserSession
+
+class UserSession < Authlogic::Session::Base
+
+  def to_key
+    new_record? ? nil : [ self.send(self.class.primary_key) ]
+  end
+
+end
+
+
+rails g model User
+
+class CreateUsers < ActiveRecord::Migration
+  def self.up
+    create_table :users do |t|
+      t.string    :login,               :null => false
+      t.string    :email,               :null => false
+      t.string    :crypted_password,    :null => false
+      t.string    :password_salt,       :null => false
+      t.string    :persistence_token,   :null => false
+      #t.string    :single_access_token, :null => false                # optional, see Authlogic::Session::Params
+      #t.string    :perishable_token,    :null => false                # optional, see Authlogic::Session::Perishability
+
+      # magic fields (all optional, see Authlogic::Session::MagicColumns)
+      t.integer   :login_count,         :null => false, :default => 0
+      t.integer   :failed_login_count,  :null => false, :default => 0
+      t.datetime  :last_request_at
+      t.datetime  :current_login_at
+      t.datetime  :last_login_at
+      t.string    :current_login_ip
+      t.string    :last_login_ip
+      t.timestamps
+    end
+
+    add_index :users, ["login"], :name => "index_users_on_login", :unique => true
+    add_index :users, ["email"], :name => "index_users_on_email", :unique => true
+    add_index :users, ["persistence_token"], :name => "index_users_on_persistence_token", :unique => true
+
+  end
+
+  def self.down
+    drop_table :users
+  end
+
+end
+
+
+
+rake db:migrate
+
+
+class User < ActiveRecord::Base
+  acts_as_authentic
+end
+
+
+class ApplicationController < ActionController::Base
+  protect_from_forgery
+
+  helper_method :current_user_session, :current_user
+
+  private
+    def current_user_session
+      logger.debug "ApplicationController::current_user_session"
+      return @current_user_session if defined?(@current_user_session)
+      @current_user_session = UserSession.find
+    end
+
+    def current_user
+      logger.debug "ApplicationController::current_user"
+      return @current_user if defined?(@current_user)
+      @current_user = current_user_session && current_user_session.user
+    end
+
+    def require_user
+      logger.debug "ApplicationController::require_user"
+      unless current_user
+        store_location
+        flash[:notice] = "You must be logged in to access this page"
+        redirect_to new_user_session_url
+        return false
+      end
+    end
+
+    def require_no_user
+      logger.debug "ApplicationController::require_no_user"
+      if current_user
+        store_location
+        flash[:notice] = "You must be logged out to access this page"
+        redirect_to account_url
+        return false
+      end
+    end
+
+    def store_location
+      session[:return_to] = request.request_uri
+    end
+
+    def redirect_back_or_default(default)
+      redirect_to(session[:return_to] || default)
+      session[:return_to] = nil
+    end
+end
+
+
+
+class UserSessionsController < ApplicationController
+  before_filter :require_no_user, :only => [:new, :create]
+  before_filter :require_user, :only => :destroy
+
+  def new
+    @user_session = UserSession.new
+  end
+
+  def create
+    @user_session = UserSession.new(params[:user_session])
+    if @user_session.save
+      flash[:notice] = "Login successful!"
+      redirect_back_or_default users_url
+    else
+      render :action => :new
+    end
+  end
+
+  def destroy
+    current_user_session.destroy
+    flash[:notice] = "Logout successful!"
+    redirect_back_or_default new_user_session_url
+  end
+end
+
+<%= form_for @user_session, :url => {:action => "create"} do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.label :remember_me %><br />
+    <%= f.check_box :remember_me %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+
+rails plugin install git://github.com/rails/dynamic_form.git
+
+rails g controller home index
+
+class HomeController < ApplicationController
+  def index
+  end
+
+end
+
+
+
+class UsersController < ApplicationController
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:notice] = "Registration successful."
+      redirect_to root_url
+    else
+      render :action => 'new'
+    end
+  end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Successfully updated profile."
+      redirect_to root_url
+    else
+      render :action => 'edit'
+    end
+  end
+end
+
+
+<% form_for @user do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :username %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+
+
+
+<% title "Edit User" %>
+
+<%= render :partial => 'form' %>
+
+
+<% title "New User" %>
+
+<%= render :partial => 'form' %>
+

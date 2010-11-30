@@ -1,0 +1,17 @@
+<%= form_for @user_session, :url => {:action => "create"} do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.label :remember_me %><br />
+    <%= f.check_box :remember_me %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
