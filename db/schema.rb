@@ -10,7 +10,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101130060221) do
+ActiveRecord::Schema.define(:version => 20101201143318) do
+
+  create_table "articles", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.string   "author_name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "article_id"
+    t.string   "author_name"
+    t.string   "site_url"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                             :null => false
@@ -27,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20101130060221) do
     t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

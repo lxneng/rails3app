@@ -8,6 +8,7 @@ gem 'rails', '3.0.3'
 gem 'mysql2'
 gem "authlogic"
 gem "rails3-generators"
+gem 'cancan'
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -230,3 +230,34 @@ end
 
 <%= render :partial => 'form' %>
 
+
+
+
+===================2010-12-01 21:52========
+rails g model article name:string content:text author_name:string
+vim db/migrate/20101201135157_create_articles.rb
+
+class CreateArticles < ActiveRecord::Migration
+  def self.up
+    create_table :articles do |t|
+      t.string :name
+      t.text :content
+      t.string :author_name
+      t.references :user
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :articles
+  end
+end
+
+class Article < ActiveRecord::Base
+  belongs_to :user
+end
+
+class User < ActiveRecord::Base
+  acts_as_authentic
+  has_many :articles
+end

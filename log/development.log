@@ -1,0 +1,1627 @@
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (154.6ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (310.1ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.7ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateUsers (20101130060221)
+  [1m[35mSQL (125.9ms)[0m  CREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `crypted_password` varchar(255) NOT NULL, `password_salt` varchar(255) NOT NULL, `persistence_token` varchar(255) NOT NULL, `login_count` int(11) DEFAULT 0 NOT NULL, `failed_login_count` int(11) DEFAULT 0 NOT NULL, `last_request_at` datetime, `current_login_at` datetime, `last_login_at` datetime, `current_login_ip` varchar(255), `last_login_ip` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.6ms)[0m  [1mSHOW KEYS FROM `users`[0m
+  [1m[35mSQL (199.4ms)[0m  CREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW KEYS FROM `users`[0m
+  [1m[35mSQL (125.7ms)[0m  CREATE UNIQUE INDEX `index_users_on_email` ON `users` (`email`)
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW KEYS FROM `users`[0m
+  [1m[35mSQL (180.1ms)[0m  CREATE UNIQUE INDEX `index_users_on_persistence_token` ON `users` (`persistence_token`)
+  [1m[36mSQL (1.7ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20101130060221')[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.5ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (6.7ms)[0m  [1mdescribe `users`[0m
+  [1m[35mSQL (1.0ms)[0m  SHOW KEYS FROM `users`
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 21:46:57 +0800
+  Processing by HomeController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+Rendered home/index.html.erb within layouts/application (104.3ms)
+Completed 200 OK in 111ms (Views: 110.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2010-12-01 21:47:01 +0800
+  Processing by UsersController#new as HTML
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_users__form_html_erb__209754883685946440_2153255360__1461324508731694018 at /Users/eric/NetBeans_Workspace/rails3app/app/views/users/_form.html.erb:1)
+Rendered users/_form.html.erb (15.5ms)
+ApplicationController::current_user
+ApplicationController::current_user_session
+Rendered users/new.html.erb within layouts/application (28.7ms)
+Completed 200 OK in 55ms (Views: 34.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-12-01 21:47:21 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "user"=>{"login"=>"lxneng", "email"=>"lxneng@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Submit"}
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (31.3ms)[0m  SHOW TABLES
+  [1m[36mUser Load (1.3ms)[0m  [1mSELECT `users`.`id` FROM `users` WHERE (LOWER(`users`.`email`) = LOWER('lxneng@gmail.com')) LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.`id` FROM `users` WHERE (LOWER(`users`.`login`) = LOWER('lxneng')) LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.`id` FROM `users` WHERE (`users`.`persistence_token` = BINARY 'c07a5d2ff5a9e6d25d941a345979cfd8c66c831209fe1c9ba2e1957f7214e9b8b479318a15aa18ee2af47ad2e73a5f90f8ed831439729bb46c7c15111f211214') LIMIT 1[0m
+  [1m[35mSQL (1.6ms)[0m  describe `users`
+  [1m[36mAREL (0.4ms)[0m  [1mINSERT INTO `users` (`login`, `email`, `crypted_password`, `password_salt`, `persistence_token`, `login_count`, `failed_login_count`, `last_request_at`, `current_login_at`, `last_login_at`, `current_login_ip`, `last_login_ip`, `created_at`, `updated_at`) VALUES ('lxneng', 'lxneng@gmail.com', 'dce0fcd8a5fdcaa3a58719a03cb071457fc8a3b4ceb01e19dd71e9307e46c16a1935ddf03cf5fbde1c893c76846a719a32792e96edc83688a269a9bca494f53f', '8d7ExepUvq7tcFBsyH2', 'c07a5d2ff5a9e6d25d941a345979cfd8c66c831209fe1c9ba2e1957f7214e9b8b479318a15aa18ee2af47ad2e73a5f90f8ed831439729bb46c7c15111f211214', 1, 0, '2010-12-01 13:47:21', '2010-12-01 13:47:21', NULL, '127.0.0.1', NULL, '2010-12-01 13:47:21', '2010-12-01 13:47:21')[0m
+  [1m[35mSQL (0.7ms)[0m  COMMIT
+Redirected to http://lvh.me:3000/
+Completed 302 Found in 368ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 21:47:21 +0800
+  Processing by HomeController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = 'c07a5d2ff5a9e6d25d941a345979cfd8c66c831209fe1c9ba2e1957f7214e9b8b479318a15aa18ee2af47ad2e73a5f90f8ed831439729bb46c7c15111f211214') LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = 'c07a5d2ff5a9e6d25d941a345979cfd8c66c831209fe1c9ba2e1957f7214e9b8b479318a15aa18ee2af47ad2e73a5f90f8ed831439729bb46c7c15111f211214') LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.4ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 13:47:21', `updated_at` = '2010-12-01 13:47:21' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+Rendered home/index.html.erb within layouts/application (103.6ms)
+Completed 200 OK in 108ms (Views: 106.5ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/users/current/edit" for 127.0.0.1 at 2010-12-01 21:47:24 +0800
+  Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"current"}
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = 'c07a5d2ff5a9e6d25d941a345979cfd8c66c831209fe1c9ba2e1957f7214e9b8b479318a15aa18ee2af47ad2e73a5f90f8ed831439729bb46c7c15111f211214') LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 13:47:24', `updated_at` = '2010-12-01 13:47:24' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_users__form_html_erb__209754883685946440_2156925220__1461324508731694018 at /Users/eric/NetBeans_Workspace/rails3app/app/views/users/_form.html.erb:1)
+Rendered users/_form.html.erb (5.9ms)
+ApplicationController::current_user
+Rendered users/edit.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 83ms (Views: 38.5ms | ActiveRecord: 37.7ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-12-01 21:47:27 +0800
+  Processing by UserSessionsController#destroy as HTML
+ApplicationController::require_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = 'c07a5d2ff5a9e6d25d941a345979cfd8c66c831209fe1c9ba2e1957f7214e9b8b479318a15aa18ee2af47ad2e73a5f90f8ed831439729bb46c7c15111f211214') LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 13:47:27', `updated_at` = '2010-12-01 13:47:27' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.7ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+ApplicationController::current_user_session
+Redirected to http://lvh.me:3000/user_sessions/new
+Completed 302 Found in 43ms
+
+
+Started GET "/user_sessions/new" for 127.0.0.1 at 2010-12-01 21:47:27 +0800
+  Processing by UserSessionsController#new as HTML
+ApplicationController::require_no_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+ApplicationController::current_user
+Rendered user_sessions/new.html.erb within layouts/application (40.0ms)
+Completed 200 OK in 75ms (Views: 45.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2010-12-01 21:47:28 +0800
+  Processing by UserSessionsController#new as HTML
+ApplicationController::require_no_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+ApplicationController::current_user
+Rendered user_sessions/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 33ms (Views: 10.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/user_sessions" for 127.0.0.1 at 2010-12-01 21:47:38 +0800
+  Processing by UserSessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "user_session"=>{"login"=>"lxneng", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Submit"}
+ApplicationController::require_no_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (LOWER(`users`.login) = 'lxneng') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from create at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/user_sessions_controller.rb:11)
+  [1m[35mAREL (0.8ms)[0m  UPDATE `users` SET `login_count` = 2, `last_login_at` = '2010-12-01 13:47:21', `current_login_at` = '2010-12-01 13:47:38', `last_login_ip` = '127.0.0.1', `last_request_at` = '2010-12-01 13:47:38', `updated_at` = '2010-12-01 13:47:38' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.5ms)[0m  [1mCOMMIT[0m
+Redirected to http://lvh.me:3000/
+Completed 302 Found in 261ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 21:47:38 +0800
+  Processing by HomeController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.5ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 13:47:39', `updated_at` = '2010-12-01 13:47:39' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+Rendered home/index.html.erb within layouts/application (51.3ms)
+Completed 200 OK in 56ms (Views: 54.3ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 21:47:44 +0800
+  Processing by HomeController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 13:47:44', `updated_at` = '2010-12-01 13:47:44' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+Rendered home/index.html.erb within layouts/application (49.1ms)
+Completed 200 OK in 54ms (Views: 52.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2010-12-01 22:14:54 +0800
+
+ActionController::RoutingError (undefined local variable or method `load_and_authorize_resource' for ArticlesController:Class):
+  app/controllers/articles_controller.rb:2:in `<class:ArticlesController>'
+  app/controllers/articles_controller.rb:1:in `<top (required)>'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2010-12-01 22:15:16 +0800
+  Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.7ms)[0m  SELECT `articles`.* FROM `articles`
+Mysql2::Error: Table 'rails3app.articles' doesn't exist: SELECT `articles`.* FROM `articles`
+Completed   in 37ms
+
+ActiveRecord::StatementInvalid (Mysql2::Error: Table 'rails3app.articles' doesn't exist: SELECT `articles`.* FROM `articles`):
+  app/controllers/articles_controller.rb:5:in `index'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.2ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.8ms)
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.7ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateUsers (20101130060221)
+Migrating to CreateArticles (20101201135157)
+  [1m[35mSQL (125.7ms)[0m  CREATE TABLE `articles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `content` text, `author_name` varchar(255), `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20101201135157')[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.8ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.5ms)[0m  [1mdescribe `articles`[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW KEYS FROM `articles`
+  [1m[36mSQL (2.0ms)[0m  [1mdescribe `users`[0m
+  [1m[35mSQL (0.6ms)[0m  SHOW KEYS FROM `users`
+
+
+Started GET "/articles" for 127.0.0.1 at 2010-12-01 22:15:37 +0800
+  Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT `articles`.* FROM `articles`[0m
+ERROR: compiling _app_views_articles_index_html_erb__4075893734485789198_2186448740_4269452697603510199 RAISED /Users/eric/NetBeans_Workspace/rails3app/app/views/articles/index.html.erb:4: syntax error, unexpected ')', expecting keyword_do_cond or ';' or '\n'
+...d= ( for article in @articles );@output_buffer.safe_concat('
+...                               ^
+/Users/eric/NetBeans_Workspace/rails3app/app/views/articles/index.html.erb:11: syntax error, unexpected keyword_end, expecting ')'
+'); end 
+       ^
+/Users/eric/NetBeans_Workspace/rails3app/app/views/articles/index.html.erb:17: syntax error, unexpected keyword_ensure, expecting ')'
+/Users/eric/NetBeans_Workspace/rails3app/app/views/articles/index.html.erb:19: syntax error, unexpected keyword_end, expecting ')'
+Function body:           def _app_views_articles_index_html_erb__4075893734485789198_2186448740_4269452697603510199(local_assigns)
+            _old_virtual_path, @_virtual_path = @_virtual_path, "articles/index";_old_output_buffer = @output_buffer;;@output_buffer = ActionView::OutputBuffer.new; title "Articles" 
+@output_buffer.safe_concat('
+<div id="articles">
+');@output_buffer.append= ( for article in @articles );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('  <h2>
+    ');@output_buffer.append= ( link_to h(article.name), article );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('    <span class="comments">(');;@output_buffer.safe_concat(')</span>
+  </h2>
+  <div class="author">from ');@output_buffer.append= (h article.author_name );@output_buffer.safe_concat(' on ');@output_buffer.append= ( article.created_at.strftime('%b %d, %Y') );@output_buffer.safe_concat('</div>
+  <div class="content">');@output_buffer.append= ( simple_format(article.content) );@output_buffer.safe_concat('</div>
+'); end 
+@output_buffer.safe_concat('</div>
+
+');
+@output_buffer.safe_concat('  <p>');@output_buffer.append= ( link_to "New Article", new_article_path );@output_buffer.safe_concat('</p>
+');;@output_buffer.to_s
+          ensure
+            @_virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_view/template.rb:255:in `module_eval'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_view/template.rb:255:in `compile'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_view/template.rb:134:in `block in render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/notifications.rb:54:in `instrument'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_view/template.rb:127:in `render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_view/render/rendering.rb:59:in `block in _render_template'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/notifications.rb:52:in `block in instrument'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/notifications.rb:52:in `instrument'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_view/render/rendering.rb:56:in `_render_template'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_view/render/rendering.rb:26:in `render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/rendering.rb:114:in `_render_template'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/rendering.rb:108:in `render_to_body'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/renderers.rb:47:in `render_to_body'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/compatibility.rb:55:in `render_to_body'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/rendering.rb:101:in `render_to_string'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/rendering.rb:92:in `render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/rendering.rb:17:in `render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/core_ext/benchmark.rb:5:in `block in ms'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/instrumentation.rb:40:in `block in render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activerecord-3.0.3/lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/instrumentation.rb:39:in `render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/base.rb:151:in `process_action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/rendering.rb:11:in `process_action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/callbacks.rb:440:in `_run__1174419458042324428__process_action__2579410082956963513__callbacks'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/callbacks.rb:409:in `_run_process_action_callbacks'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/callbacks.rb:93:in `run_callbacks'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/callbacks.rb:17:in `process_action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/notifications.rb:52:in `block in instrument'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/notifications.rb:52:in `instrument'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/rescue.rb:17:in `process_action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/base.rb:120:in `process'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/abstract_controller/rendering.rb:40:in `process'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal.rb:138:in `dispatch'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_controller/metal.rb:178:in `block in action'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/routing/route_set.rb:62:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/routing/route_set.rb:27:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/route_set.rb:148:in `block in call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/code_generation.rb:93:in `block in recognize'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/code_generation.rb:68:in `optimized_each'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/code_generation.rb:92:in `recognize'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/route_set.rb:139:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/routing/route_set.rb:492:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/head.rb:14:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/methodoverride.rb:24:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/flash.rb:182:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/cookies.rb:295:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activerecord-3.0.3/lib/active_record/query_cache.rb:32:in `block in call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activerecord-3.0.3/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activerecord-3.0.3/lib/active_record/query_cache.rb:12:in `cache'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activerecord-3.0.3/lib/active_record/query_cache.rb:31:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activerecord-3.0.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:353:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/sendfile.rb:107:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/railties-3.0.3/lib/rails/rack/logger.rb:13:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/runtime.rb:17:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/activesupport-3.0.3/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/lock.rb:11:in `block in call'
+<internal:prelude>:10:in `synchronize'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/lock.rb:11:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/static.rb:30:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/railties-3.0.3/lib/rails/application.rb:168:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/railties-3.0.3/lib/rails/application.rb:77:in `method_missing'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/railties-3.0.3/lib/rails/rack/log_tailer.rb:14:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/content_length.rb:13:in `call'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/handler/webrick.rb:52:in `service'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+/usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+Rendered articles/index.html.erb within layouts/application (31.6ms)
+Completed   in 85ms
+
+ActionView::Template::Error (/Users/eric/NetBeans_Workspace/rails3app/app/views/articles/index.html.erb:4: syntax error, unexpected ')', expecting keyword_do_cond or ';' or '\n'
+...d= ( for article in @articles );@output_buffer.safe_concat('
+...                               ^
+/Users/eric/NetBeans_Workspace/rails3app/app/views/articles/index.html.erb:11: syntax error, unexpected keyword_end, expecting ')'
+'); end 
+       ^
+/Users/eric/NetBeans_Workspace/rails3app/app/views/articles/index.html.erb:17: syntax error, unexpected keyword_ensure, expecting ')'
+/Users/eric/NetBeans_Workspace/rails3app/app/views/articles/index.html.erb:19: syntax error, unexpected keyword_end, expecting ')'):
+    1: <% title "Articles" %>
+    2: 
+    3: <div id="articles">
+    4: <%= for article in @articles %>
+    5:   <h2>
+    6:     <%= link_to h(article.name), article %>
+    7:     <span class="comments">(<%#= pluralize(article.comments.size, 'comment') %>)</span>
+  
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.1ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2010-12-01 22:16:13 +0800
+  Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:16:13', `updated_at` = '2010-12-01 14:16:13' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+Rendered articles/index.html.erb within layouts/application (78.0ms)
+Completed 200 OK in 91ms (Views: 81.1ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2010-12-01 22:16:15 +0800
+  Processing by ArticlesController#new as HTML
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_articles__form_html_erb___49827162819330842_2185763460__1461324508731694018 at /Users/eric/NetBeans_Workspace/rails3app/app/views/articles/_form.html.erb:2)
+Rendered articles/_form.html.erb (9.3ms)
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.6ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.4ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:16:15', `updated_at` = '2010-12-01 14:16:15' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+Rendered articles/new.html.erb within layouts/application (102.6ms)
+Completed 200 OK in 117ms (Views: 105.8ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2010-12-01 22:16:24 +0800
+  Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "article"=>{"name"=>"test", "content"=>"fdsjfkds", "author_name"=>"lxneng"}, "commit"=>"Submit"}
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:16:24', `updated_at` = '2010-12-01 14:16:24' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.7ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (1.4ms)[0m  describe `articles`
+  [1m[36mAREL (1.0ms)[0m  [1mINSERT INTO `articles` (`name`, `content`, `author_name`, `user_id`, `created_at`, `updated_at`) VALUES ('test', 'fdsjfkds', 'lxneng', 1, '2010-12-01 14:16:24', '2010-12-01 14:16:24')[0m
+  [1m[35mSQL (0.4ms)[0m  COMMIT
+Redirected to http://lvh.me:3000/articles/1
+Completed 302 Found in 71ms
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2010-12-01 22:16:24 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 1) LIMIT 1
+Rendered articles/show.html.erb within layouts/application (52.0ms)
+Completed   in 67ms
+
+ActionView::Template::Error (undefined method `comments' for #<Article:0x00000104971fa8>):
+    15: </p>
+    16: 
+    17: <%# unless @article.comments.empty? %>
+    18:   <h2><%= pluralize(@article.comments.size, 'comment') %></h2>
+    19: 
+    20:   <div id="comments">
+    21:   <%# for comment in @article.comments %>
+  app/views/articles/show.html.erb:18:in `_app_views_articles_show_html_erb__377096431086845469_2185974640_4269452697603510199'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.7ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.2ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2010-12-01 22:16:46 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mArticle Load (1.8ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 1) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:16:46', `updated_at` = '2010-12-01 14:16:46' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+Rendered articles/show.html.erb within layouts/application (97.7ms)
+Completed 200 OK in 116ms (Views: 101.3ms | ActiveRecord: 8.4ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2010-12-01 22:17:01 +0800
+  Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "article"=>{"name"=>"test", "content"=>"fdsjfkdsdfssssssssssssssssss", "author_name"=>"lxneng"}, "commit"=>"Submit"}
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:17:01', `updated_at` = '2010-12-01 14:17:01' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.6ms)[0m  [1mdescribe `articles`[0m
+  [1m[35mAREL (0.8ms)[0m  INSERT INTO `articles` (`name`, `content`, `author_name`, `user_id`, `created_at`, `updated_at`) VALUES ('test', 'fdsjfkdsdfssssssssssssssssss', 'lxneng', 1, '2010-12-01 14:17:01', '2010-12-01 14:17:01')
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://lvh.me:3000/articles/2
+Completed 302 Found in 111ms
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:17:01 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mSQL (0.5ms)[0m  SHOW TABLES
+  [1m[36mArticle Load (1.1ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:17:01', `updated_at` = '2010-12-01 14:17:01' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+Rendered articles/show.html.erb within layouts/application (107.5ms)
+Completed 200 OK in 137ms (Views: 122.2ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:17:07 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mArticle Load (1.5ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:17:07', `updated_at` = '2010-12-01 14:17:07' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.7ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+Rendered articles/show.html.erb within layouts/application (97.2ms)
+Completed 200 OK in 114ms (Views: 100.4ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:17:08 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mSQL (0.5ms)[0m  SHOW TABLES
+  [1m[36mArticle Load (1.4ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:17:08', `updated_at` = '2010-12-01 14:17:08' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+Rendered articles/show.html.erb within layouts/application (108.4ms)
+Completed 200 OK in 125ms (Views: 111.6ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:17:09 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mArticle Load (1.4ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:17:09', `updated_at` = '2010-12-01 14:17:09' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+Rendered articles/show.html.erb within layouts/application (97.8ms)
+Completed 200 OK in 115ms (Views: 101.2ms | ActiveRecord: 8.2ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:17:09 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mArticle Load (1.4ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:17:09', `updated_at` = '2010-12-01 14:17:09' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+Rendered articles/show.html.erb within layouts/application (98.0ms)
+Completed 200 OK in 114ms (Views: 101.2ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:17:10 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mArticle Load (1.4ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:17:10', `updated_at` = '2010-12-01 14:17:10' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+Rendered articles/show.html.erb within layouts/application (98.7ms)
+Completed 200 OK in 115ms (Views: 102.2ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:17:10 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mArticle Load (1.5ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:17:10', `updated_at` = '2010-12-01 14:17:10' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.5ms)[0m  COMMIT
+ApplicationController::current_user_session
+Rendered articles/show.html.erb within layouts/application (106.3ms)
+Completed 200 OK in 123ms (Views: 109.6ms | ActiveRecord: 3.3ms)
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateUsers (20101130060221)
+Migrating to CreateArticles (20101201135157)
+Migrating to CreateComments (20101201141809)
+  [1m[35mSQL (121.7ms)[0m  CREATE TABLE `comments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `article_id` int(11), `author_name` varchar(255), `site_url` varchar(255), `content` text, `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20101201141809')[0m
+  [1m[35mSQL (0.8ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.7ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (7.5ms)[0m  [1mdescribe `articles`[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW KEYS FROM `articles`
+  [1m[36mSQL (1.7ms)[0m  [1mdescribe `comments`[0m
+  [1m[35mSQL (0.7ms)[0m  SHOW KEYS FROM `comments`
+  [1m[36mSQL (15.6ms)[0m  [1mdescribe `users`[0m
+  [1m[35mSQL (0.6ms)[0m  SHOW KEYS FROM `users`
+  [1m[36mSQL (7.0ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.6ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateUsers (20101130060221)
+Migrating to CreateArticles (20101201135157)
+Migrating to CreateComments (20101201141809)
+Migrating to AddAdminToUsers (20101201143318)
+  [1m[35mSQL (333.1ms)[0m  ALTER TABLE `users` ADD `admin` tinyint(1)
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20101201143318')[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.9ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (8.9ms)[0m  [1mdescribe `articles`[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW KEYS FROM `articles`
+  [1m[36mSQL (1.7ms)[0m  [1mdescribe `comments`[0m
+  [1m[35mSQL (0.7ms)[0m  SHOW KEYS FROM `comments`
+  [1m[36mSQL (1.8ms)[0m  [1mdescribe `users`[0m
+  [1m[35mSQL (0.9ms)[0m  SHOW KEYS FROM `users`
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:36:52 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mArticle Load (0.7ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+Rendered articles/show.html.erb within layouts/application (15.7ms)
+Completed   in 35ms
+
+ActionView::Template::Error (undefined method `can?' for #<#<Class:0x000001039c5e38>:0x000001039c30c0>):
+    5: <%= simple_format @article.content %>
+    6: 
+    7: <p>
+    8:   <% if can? :update, @article %>
+    9:     <%= link_to "Edit", edit_article_path(@article) %> |
+    10:   <% end %>
+    11:   <% if can? :destroy, @article %>
+  app/views/articles/show.html.erb:8:in `_app_views_articles_show_html_erb__377096431086845469_2177764040_4269452697603510199'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.8ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (12.8ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:37:38 +0800
+
+ActionController::RoutingError (undefined local variable or method `load_and_authorize_resource' for ArticlesController:Class):
+  app/controllers/articles_controller.rb:2:in `<class:ArticlesController>'
+  app/controllers/articles_controller.rb:1:in `<top (required)>'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:37:41 +0800
+
+ActionController::RoutingError (undefined local variable or method `load_and_authorize_resource' for ArticlesController:Class):
+  app/controllers/articles_controller.rb:2:in `<class:ArticlesController>'
+  app/controllers/articles_controller.rb:1:in `<top (required)>'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:37:42 +0800
+
+ActionController::RoutingError (undefined local variable or method `load_and_authorize_resource' for ArticlesController:Class):
+  app/controllers/articles_controller.rb:2:in `<class:ArticlesController>'
+  app/controllers/articles_controller.rb:1:in `<top (required)>'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:37:43 +0800
+
+ActionController::RoutingError (undefined local variable or method `load_and_authorize_resource' for ArticlesController:Class):
+  app/controllers/articles_controller.rb:2:in `<class:ArticlesController>'
+  app/controllers/articles_controller.rb:1:in `<top (required)>'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:38:14 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSQL (0.5ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:38:14', `updated_at` = '2010-12-01 14:38:14' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mArticle Load (0.4ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+Completed   in 340ms
+
+ActiveRecord::UnknownAttributeError (unknown attribute: article):
+  app/controllers/articles_controller.rb:10:in `new'
+  app/controllers/articles_controller.rb:10:in `show'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.0ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.7ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:38:16 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.3ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:38:16', `updated_at` = '2010-12-01 14:38:16' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.6ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+Completed   in 116ms
+
+ActiveRecord::UnknownAttributeError (unknown attribute: article):
+  app/controllers/articles_controller.rb:10:in `new'
+  app/controllers/articles_controller.rb:10:in `show'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  [1m[35mSQL (0.5ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.5ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.8ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:38:17 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mArticle Load (1.2ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:38:17', `updated_at` = '2010-12-01 14:38:17' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+Completed   in 118ms
+
+ActiveRecord::UnknownAttributeError (unknown attribute: article):
+  app/controllers/articles_controller.rb:10:in `new'
+  app/controllers/articles_controller.rb:10:in `show'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.6ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.8ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:38:18 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.3ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:38:18', `updated_at` = '2010-12-01 14:38:18' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+Completed   in 117ms
+
+ActiveRecord::UnknownAttributeError (unknown attribute: article):
+  app/controllers/articles_controller.rb:10:in `new'
+  app/controllers/articles_controller.rb:10:in `show'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.0ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:38:19 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mArticle Load (1.5ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:38:20', `updated_at` = '2010-12-01 14:38:20' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+Completed   in 114ms
+
+ActiveRecord::UnknownAttributeError (unknown attribute: article):
+  app/controllers/articles_controller.rb:10:in `new'
+  app/controllers/articles_controller.rb:10:in `show'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (7.2ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.4ms)
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (39.9ms)[0m  DROP TABLE `comments`
+  [1m[36mAREL (0.9ms)[0m  [1mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20101201141809'[0m
+  [1m[35mSQL (0.6ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.8ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.8ms)[0m  [1mdescribe `articles`[0m
+  [1m[35mSQL (1.2ms)[0m  SHOW KEYS FROM `articles`
+  [1m[36mSQL (1.9ms)[0m  [1mdescribe `users`[0m
+  [1m[35mSQL (0.7ms)[0m  SHOW KEYS FROM `users`
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[36mSQL (0.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.4ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (157.2ms)[0m  CREATE TABLE `comments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `article_id` int(11), `author_name` varchar(255), `site_url` varchar(255), `content` text, `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20101201141809')[0m
+  [1m[35mSQL (0.5ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.8ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.6ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.7ms)[0m  [1mdescribe `articles`[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW KEYS FROM `articles`
+  [1m[36mSQL (4.2ms)[0m  [1mdescribe `comments`[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW KEYS FROM `comments`
+  [1m[36mSQL (2.2ms)[0m  [1mdescribe `users`[0m
+  [1m[35mSQL (0.7ms)[0m  SHOW KEYS FROM `users`
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:40:42 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.7ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.7ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:40:42', `updated_at` = '2010-12-01 14:40:42' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.5ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+Rendered articles/show.html.erb within layouts/application (57.9ms)
+Completed   in 195ms
+
+ActionView::Template::Error (undefined method `comments' for #<Article:0x00000101578238>):
+    14:   <%= link_to "Back to Articles", articles_path %>
+    15: </p>
+    16: 
+    17: <% unless @article.comments.empty? %>
+    18:   <h2><%= pluralize(@article.comments.size, 'comment') %></h2>
+    19: 
+    20:   <div id="comments">
+  app/views/articles/show.html.erb:17:in `_app_views_articles_show_html_erb__3112141581447836542_2157594520_3026959666198597478'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.2ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (44.7ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:41:18 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mArticle Load (1.6ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.4ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:41:18', `updated_at` = '2010-12-01 14:41:18' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mArticle Load (0.4ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+  [1m[35mSQL (0.5ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+Rendered comments/_form.html.erb (20.3ms)
+Rendered articles/show.html.erb within layouts/application (28.9ms)
+Completed   in 168ms
+
+ActionView::Template::Error (undefined method `comments_path' for #<#<Class:0x000001032def48>:0x000001032dcec8>):
+    1: <%= error_messages_for :comment %>
+    2: <% form_for @comment do |f| %>
+    3:   <%= f.hidden_field :article_id %>
+    4:   <p>
+    5:     <%= f.label :author_name, 'Name' %><br />
+  app/views/comments/_form.html.erb:2:in `_app_views_comments__form_html_erb__2399960183463083525_2174042800__3066673859882866686'
+  app/views/articles/show.html.erb:40:in `_app_views_articles_show_html_erb__3112141581447836542_2174147960_3026959666198597478'
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.0ms)
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (10.3ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:42:44 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mArticle Load (1.4ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:42:44', `updated_at` = '2010-12-01 14:42:44' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_comments__form_html_erb__2399960183463083525_2174632660__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/comments/_form.html.erb:2)
+Rendered comments/_form.html.erb (2.9ms)
+ApplicationController::current_user
+Rendered articles/show.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 148ms (Views: 52.3ms | ActiveRecord: 3.4ms)
+
+
+Started POST "/comments" for 127.0.0.1 at 2010-12-01 22:42:57 +0800
+  Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "comment"=>{"article_id"=>"2", "author_name"=>"lxneng", "site_url"=>"", "content"=>"dfsjkfsjd\r\n"}, "commit"=>"Submit"}
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:42:57', `updated_at` = '2010-12-01 14:42:57' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+ApplicationController::current_user
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.8ms)[0m  describe `comments`
+  [1m[36mAREL (0.5ms)[0m  [1mINSERT INTO `comments` (`article_id`, `author_name`, `site_url`, `content`, `user_id`, `created_at`, `updated_at`) VALUES (2, 'lxneng', '', 'dfsjkfsjd\r\n', 1, '2010-12-01 14:42:57', '2010-12-01 14:42:57')[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+Redirected to http://lvh.me:3000/articles/2
+Completed 302 Found in 85ms
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:42:57 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.7ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:42:57', `updated_at` = '2010-12-01 14:42:57' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT `comments`.* FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_comments__form_html_erb__2399960183463083525_2174430600__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/comments/_form.html.erb:2)
+Rendered comments/_form.html.erb (2.9ms)
+ApplicationController::current_user
+Rendered articles/show.html.erb within layouts/application (55.5ms)
+Completed 200 OK in 154ms (Views: 60.2ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2010-12-01 22:43:10 +0800
+  Processing by ArticlesController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:43:10', `updated_at` = '2010-12-01 14:43:10' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles`[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 1)
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+ApplicationController::current_user
+Rendered articles/index.html.erb within layouts/application (22.4ms)
+Completed 200 OK in 138ms (Views: 26.6ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-12-01 22:43:20 +0800
+  Processing by UserSessionsController#destroy as HTML
+ApplicationController::require_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.4ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:43:20', `updated_at` = '2010-12-01 14:43:20' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+ApplicationController::current_user_session
+Redirected to http://lvh.me:3000/user_sessions/new
+Completed 302 Found in 87ms
+
+
+Started GET "/user_sessions/new" for 127.0.0.1 at 2010-12-01 22:43:20 +0800
+  Processing by UserSessionsController#new as HTML
+ApplicationController::require_no_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+ApplicationController::current_user
+Rendered user_sessions/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 41ms (Views: 10.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2010-12-01 22:43:24 +0800
+  Processing by UsersController#new as HTML
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_users__form_html_erb__512301213484275400_2159623060__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/users/_form.html.erb:1)
+Rendered users/_form.html.erb (14.9ms)
+ApplicationController::current_user
+ApplicationController::current_user_session
+Rendered users/new.html.erb within layouts/application (27.0ms)
+Completed 200 OK in 56ms (Views: 32.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2010-12-01 22:43:41 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "user"=>{"login"=>"admin", "email"=>"admin@admin.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Submit"}
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mSQL (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.`id` FROM `users` WHERE (LOWER(`users`.`email`) = LOWER('admin@admin.com')) LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.`id` FROM `users` WHERE (LOWER(`users`.`login`) = LOWER('admin')) LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.`id` FROM `users` WHERE (`users`.`persistence_token` = BINARY '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1
+  [1m[36mSQL (3.6ms)[0m  [1mdescribe `users`[0m
+  [1m[35mAREL (1.5ms)[0m  INSERT INTO `users` (`login`, `email`, `crypted_password`, `password_salt`, `persistence_token`, `login_count`, `failed_login_count`, `last_request_at`, `current_login_at`, `last_login_at`, `current_login_ip`, `last_login_ip`, `created_at`, `updated_at`, `admin`) VALUES ('admin', 'admin@admin.com', 'b6ebce97ab6ccb22e149b4e8c12162138cd1f2f6904a3fbdfefb684ddcf43fe757060d81bc82e2f692ee3bd8e6e3c4438d9e44ce39e2fed2d7196d677832218c', 'RH3N6zAfLnCECOGeqCv', '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff', 1, 0, '2010-12-01 14:43:41', '2010-12-01 14:43:41', NULL, '127.0.0.1', NULL, '2010-12-01 14:43:41', '2010-12-01 14:43:41', NULL)
+  [1m[36mSQL (1.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://lvh.me:3000/
+Completed 302 Found in 81ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 22:43:41 +0800
+  Processing by HomeController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:43:41', `updated_at` = '2010-12-01 14:43:41' WHERE (`users`.`id` = 2)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+Rendered home/index.html.erb within layouts/application (94.5ms)
+Completed 200 OK in 100ms (Views: 98.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 22:45:12 +0800
+  Processing by HomeController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:45:12', `updated_at` = '2010-12-01 14:45:12' WHERE (`users`.`id` = 2)
+  [1m[36mSQL (30.5ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+Rendered home/index.html.erb within layouts/application (128.3ms)
+Completed 200 OK in 133ms (Views: 101.4ms | ActiveRecord: 31.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2010-12-01 22:45:17 +0800
+  Processing by ArticlesController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.7ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:45:17', `updated_at` = '2010-12-01 14:45:17' WHERE (`users`.`id` = 2)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles`[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 1)
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+ApplicationController::current_user
+Rendered articles/index.html.erb within layouts/application (29.5ms)
+Completed 200 OK in 137ms (Views: 33.6ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2010-12-01 22:45:20 +0800
+  Processing by ArticlesController#new as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:45:20', `updated_at` = '2010-12-01 14:45:20' WHERE (`users`.`id` = 2)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_articles__form_html_erb___3028067584876468089_2159274820__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/articles/_form.html.erb:2)
+Rendered articles/_form.html.erb (8.2ms)
+ApplicationController::current_user
+Rendered articles/new.html.erb within layouts/application (12.8ms)
+Completed 200 OK in 87ms (Views: 17.7ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:45:23 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.7ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.5ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:45:23', `updated_at` = '2010-12-01 14:45:23' WHERE (`users`.`id` = 2)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT `comments`.* FROM `comments` WHERE (`comments`.article_id = 2)
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_comments__form_html_erb__2399960183463083525_2174106480__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/comments/_form.html.erb:2)
+Rendered comments/_form.html.erb (2.8ms)
+ApplicationController::current_user
+Rendered articles/show.html.erb within layouts/application (17.1ms)
+Completed 200 OK in 158ms (Views: 21.3ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 22:45:50 +0800
+  Processing by ArticlesController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:45:50', `updated_at` = '2010-12-01 14:45:50' WHERE (`users`.`id` = 2)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 1)[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)
+ApplicationController::current_user
+Rendered articles/index.html.erb within layouts/application (31.0ms)
+Completed 200 OK in 145ms (Views: 35.3ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2010-12-01 22:45:56 +0800
+  Processing by ArticlesController#new as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:45:56', `updated_at` = '2010-12-01 14:45:56' WHERE (`users`.`id` = 2)
+  [1m[36mSQL (0.5ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_articles__form_html_erb___3028067584876468089_2158165380__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/articles/_form.html.erb:2)
+Rendered articles/_form.html.erb (8.0ms)
+ApplicationController::current_user
+Rendered articles/new.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 86ms (Views: 16.6ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2010-12-01 22:46:03 +0800
+  Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "article"=>{"name"=>"fdsfsdffssss", "content"=>"dfsdfsdfsd", "author_name"=>"dffd"}, "commit"=>"Submit"}
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:46:03', `updated_at` = '2010-12-01 14:46:03' WHERE (`users`.`id` = 2)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+ApplicationController::current_user
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.6ms)[0m  describe `articles`
+  [1m[36mAREL (0.4ms)[0m  [1mINSERT INTO `articles` (`name`, `content`, `author_name`, `user_id`, `created_at`, `updated_at`) VALUES ('fdsfsdffssss', 'dfsdfsdfsd', 'dffd', 2, '2010-12-01 14:46:03', '2010-12-01 14:46:03')[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+Redirected to http://lvh.me:3000/articles/3
+Completed 302 Found in 122ms
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2010-12-01 22:46:03 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.7ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 3) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.4ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:46:03', `updated_at` = '2010-12-01 14:46:03' WHERE (`users`.`id` = 2)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 3) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 3)
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_comments__form_html_erb__2399960183463083525_2174035380__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/comments/_form.html.erb:2)
+Rendered comments/_form.html.erb (2.9ms)
+ApplicationController::current_user
+Rendered articles/show.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 157ms (Views: 19.1ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 22:46:13 +0800
+  Processing by ArticlesController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:46:13', `updated_at` = '2010-12-01 14:46:13' WHERE (`users`.`id` = 2)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 1)[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 3)[0m
+ApplicationController::current_user
+Rendered articles/index.html.erb within layouts/application (31.8ms)
+Completed 200 OK in 145ms (Views: 35.7ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2010-12-01 22:46:17 +0800
+  Processing by ArticlesController#new as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.7ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:46:17', `updated_at` = '2010-12-01 14:46:17' WHERE (`users`.`id` = 2)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_articles__form_html_erb___3028067584876468089_2159395640__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/articles/_form.html.erb:2)
+Rendered articles/_form.html.erb (8.8ms)
+ApplicationController::current_user
+Rendered articles/new.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 127ms (Views: 19.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-12-01 22:46:22 +0800
+  Processing by UserSessionsController#destroy as HTML
+ApplicationController::require_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`persistence_token` = '2625d1c314c8879210faf129bf7ea474a932a2a3adc1f83c1e62f3d7aa6ac191d58482ffad88e61176c983769aa28190f5e94a0c25769f372f0750f49237c0ff') LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 2) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:46:22', `updated_at` = '2010-12-01 14:46:22' WHERE (`users`.`id` = 2)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+ApplicationController::current_user_session
+Redirected to http://lvh.me:3000/user_sessions/new
+Completed 302 Found in 52ms
+
+
+Started GET "/user_sessions/new" for 127.0.0.1 at 2010-12-01 22:46:22 +0800
+  Processing by UserSessionsController#new as HTML
+ApplicationController::require_no_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+ApplicationController::current_user
+Rendered user_sessions/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 83ms (Views: 10.1ms | ActiveRecord: 4.5ms)
+
+
+Started POST "/user_sessions" for 127.0.0.1 at 2010-12-01 22:46:27 +0800
+  Processing by UserSessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "user_session"=>{"login"=>"lxneng", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Submit"}
+ApplicationController::require_no_user
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE (LOWER(`users`.login) = 'lxneng') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from create at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/user_sessions_controller.rb:11)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `login_count` = 3, `last_login_at` = '2010-12-01 13:47:38', `current_login_at` = '2010-12-01 14:46:27', `last_request_at` = '2010-12-01 14:46:27', `updated_at` = '2010-12-01 14:46:27' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://lvh.me:3000/
+Completed 302 Found in 240ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-12-01 22:46:27 +0800
+  Processing by ArticlesController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:46:27', `updated_at` = '2010-12-01 14:46:27' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles`[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 1)
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 3)
+ApplicationController::current_user
+Rendered articles/index.html.erb within layouts/application (24.3ms)
+Completed 200 OK in 144ms (Views: 28.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2010-12-01 22:46:32 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (1.6ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 1) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:46:32', `updated_at` = '2010-12-01 14:46:32' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 1)
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_comments__form_html_erb__2399960183463083525_2174584920__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/comments/_form.html.erb:2)
+Rendered comments/_form.html.erb (3.1ms)
+ApplicationController::current_user
+Rendered articles/show.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 168ms (Views: 18.1ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2010-12-01 22:46:40 +0800
+  Processing by ArticlesController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:46:40', `updated_at` = '2010-12-01 14:46:40' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (28.1ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mArticle Load (0.3ms)[0m  SELECT `articles`.* FROM `articles`
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 1)[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 3)[0m
+ApplicationController::current_user
+Rendered articles/index.html.erb within layouts/application (25.2ms)
+Completed 200 OK in 183ms (Views: 29.1ms | ActiveRecord: 29.9ms)
+
+
+Started GET "/comments/1" for 127.0.0.1 at 2010-12-01 22:47:18 +0800
+
+AbstractController::ActionNotFound (The action 'show' could not be found for CommentsController):
+  
+
+Rendered /usr/local/Cellar/ruby/1.9.2-p0/lib/ruby/gems/1.9.1/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (1.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2010-12-01 22:47:28 +0800
+  Processing by ArticlesController#index as HTML
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:47:29', `updated_at` = '2010-12-01 14:47:29' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles`[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 1)
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 3)
+ApplicationController::current_user
+Rendered articles/index.html.erb within layouts/application (25.1ms)
+Completed 200 OK in 159ms (Views: 28.9ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:47:31 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.5ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:47:31', `updated_at` = '2010-12-01 14:47:31' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT `comments`.* FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_comments__form_html_erb__2399960183463083525_2185430060__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/comments/_form.html.erb:2)
+Rendered comments/_form.html.erb (3.0ms)
+ApplicationController::current_user
+Rendered articles/show.html.erb within layouts/application (61.2ms)
+Completed 200 OK in 166ms (Views: 65.5ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/comments/1/edit" for 127.0.0.1 at 2010-12-01 22:47:33 +0800
+  Processing by CommentsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mComment Load (1.3ms)[0m  SELECT `comments`.* FROM `comments` WHERE (`comments`.`id` = 1) LIMIT 1
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[35mAREL (0.3ms)[0m  UPDATE `users` SET `last_request_at` = '2010-12-01 14:47:33', `updated_at` = '2010-12-01 14:47:33' WHERE (`users`.`id` = 1)
+  [1m[36mSQL (0.6ms)[0m  [1mCOMMIT[0m
+ApplicationController::current_user_session
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_comments__form_html_erb__2399960183463083525_2185360580__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/comments/_form.html.erb:2)
+Rendered comments/_form.html.erb (8.1ms)
+ApplicationController::current_user
+Rendered comments/edit.html.erb within layouts/application (12.3ms)
+Completed 200 OK in 136ms (Views: 18.4ms | ActiveRecord: 2.9ms)
+
+
+Started POST "/comments/1" for 127.0.0.1 at 2010-12-01 22:47:36 +0800
+  Processing by CommentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"akTlTP8YvtE9vJzb4Zi/rNExc4AbxbkPBhmPLXENt2A=", "comment"=>{"article_id"=>"2", "author_name"=>"lxneng", "site_url"=>"", "content"=>"dfsjkfsjd\r\nsdfdfsdfsd"}, "commit"=>"Submit", "id"=>"1"}
+  [1m[36mComment Load (1.2ms)[0m  [1mSELECT `comments`.* FROM `comments` WHERE (`comments`.`id` = 1) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:47:37', `updated_at` = '2010-12-01 14:47:37' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `comments` SET `content` = 'dfsjkfsjd\r\nsdfdfsdfsd', `updated_at` = '2010-12-01 14:47:37' WHERE (`comments`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+Redirected to http://lvh.me:3000/articles/2
+Completed 302 Found in 124ms
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2010-12-01 22:47:37 +0800
+  Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.1ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+ApplicationController::current_user
+ApplicationController::current_user_session
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from <class:User> at /Users/eric/NetBeans_Workspace/rails3app/app/models/user.rb:2)
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: save(false) is deprecated, please give save(:validate => false) instead. (called from current_user_session at /Users/eric/NetBeans_Workspace/rails3app/app/controllers/application_controller.rb:10)
+  [1m[36mAREL (0.3ms)[0m  [1mUPDATE `users` SET `last_request_at` = '2010-12-01 14:47:37', `updated_at` = '2010-12-01 14:47:37' WHERE (`users`.`id` = 1)[0m
+  [1m[35mSQL (0.6ms)[0m  COMMIT
+ApplicationController::current_user_session
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT `articles`.* FROM `articles` WHERE (`articles`.`id` = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM `comments` WHERE (`comments`.article_id = 2)[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT `comments`.* FROM `comments` WHERE (`comments`.article_id = 2)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+DEPRECATION WARNING: <% %> style block helpers are deprecated. Please use <%= %>. (called from _app_views_comments__form_html_erb__2399960183463083525_2159438460__3066673859882866686 at /Users/eric/NetBeans_Workspace/rails3app/app/views/comments/_form.html.erb:2)
+Rendered comments/_form.html.erb (3.2ms)
+ApplicationController::current_user
+Rendered articles/show.html.erb within layouts/application (20.8ms)
+Completed 200 OK in 165ms (Views: 25.5ms | ActiveRecord: 3.6ms)

@@ -4,11 +4,15 @@ Rails3app::Application.routes.draw do
   get "user_sessions/new"
   resources :user_sessions
   resources :users
+  resources :articles do
+    resources :comments
+  end
+  resources :comments
   match 'register' => "users#new", :as => :register
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
 
-  root :to => 'home#index'
+  root :to => 'articles#index'
 
 
   # The priority is based upon order of creation:
