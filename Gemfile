@@ -9,6 +9,12 @@ gem 'mysql2'
 gem "authlogic"
 gem "rails3-generators"
 gem 'cancan'
+gem "ruby-openid"
+gem "rack-openid", ">=0.2.1", :require => "rack/openid"
+gem "oauth"
+gem "oauth2"
+gem "authlogic-connect"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -13,5 +13,10 @@
     <%= f.label :remember_me %><br />
     <%= f.check_box :remember_me %>
   </p>
+  <%=oauth_login_hidden_input%>
   <p><%= f.submit "Submit" %></p>
 <% end %>
+
+
+
+<%= button_to "Sign in with Twitter", { :controller => 'user_sessions', :action => 'create', :oauth_provider => 'twitter', :authentication_type => 'session' }, :class => 'sign-in-twitter-button'%>

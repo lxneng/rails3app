@@ -1,0 +1,5 @@
+connect:
+  twitter:
+    key: "8Qs6uHFEX6uUG7vjr5yA"
+    secret: "0vbUaOU71EiEdpUJIaXDNUkkHSuFDTQq52FAZmrQ8"
+    label: "twitter"
