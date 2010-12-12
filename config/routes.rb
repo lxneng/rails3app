@@ -13,6 +13,7 @@ Rails3app::Application.routes.draw do
   match 'logout' => "user_sessions#destroy", :as => :logout
 
   root :to => 'articles#index'
+  resources :password_resets
 
 
   # The priority is based upon order of creation:
